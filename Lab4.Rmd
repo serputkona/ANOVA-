@@ -1,0 +1,87 @@
+---
+title: "Lab4"
+author: "Anastasiia Serputko"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+getwd()
+b  <- read.csv("Ex.csv")
+b
+l <- b$Level.of.relaxation
+t <- b$Types
+library(nortest)
+library(ggplot2) 
+```
+
+
+```{r}
+stripchart(l ~ t, xlab = "Level of relaxation",  
+           ylab ="Types", col=c("blueviolet", "cyan4", "brown2", "green3"), 
+           method = "jitter")
+```
+
+
+```{r}
+boxplot(l ~ t, data = b,
+        xlab = "Level of relaxation",  
+        ylab ="Types", col=c("blueviolet", "cyan4", "brown2", "green3"))
+```
+
+
+
+```{r}
+aggregate(x = l, by = list(t), FUN = mean)
+```
+
+
+
+```{r}
+mod1 <- aov(l ~ t, data = b)
+summary(aov(l ~ t, data = b))
+```
+
+
+
+```{r}
+summary(lm(l ~ t, data = b))
+```
+
+
+
+```{r}
+bartlett.test(l ~ t)
+```
+
+
+
+```{r}
+tapply(l, t, var)
+```
+
+
+```{r}
+library(ggpubr)
+ggqqplot(mod1$residuals, color = "mediumpurple1")
+```
+
+
+```{r}
+shapiro.test(mod1$residuals)
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
